@@ -3,7 +3,6 @@ import { Tabs } from 'antd';
 
 import 'antd/dist/antd.css'; 
 import Trello from './Trello';
-// import TrelloPage from './TrelloPage';
 import TablePage from './TablePage';
 
 import data from './Data';
