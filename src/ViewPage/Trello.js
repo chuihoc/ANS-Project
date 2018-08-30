@@ -1,12 +1,18 @@
 import React from 'react';
 import { Board } from 'react-trello';
 import './Trello.css';
-// import data from './Data';
 
 class Trello extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: {}
+    }
+  }
+
+  componentWillMount = () => {
+    this.settingData([...this.props.dataSource]);
+  };
 
   shouldReceiveNewData = nextData => {
     console.log('New card has been added')
@@ -17,7 +23,7 @@ class Trello extends React.Component {
     console.log('drag started')
     console.log(`cardId: ${cardId}`)
     console.log(`laneId: ${laneId}`)
-  } 
+  }
 
   handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
     console.log('drag ended')
@@ -33,8 +39,9 @@ class Trello extends React.Component {
     const date = new Date(item[value] * 1000);
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const time = months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
-    if (value === 'startTime') return <span>{time}</span>
-    return <span style={{ color: item.status === '1' && 'red' }}>{time}</span>
+    // if (value === 'startTime') return <span>{time}</span>;
+    // return <span style={{ color: item.status === '1' && 'red' }}>{time}</span>
+    return <span>{time}</span>
   };
 
   settingData = (dataSource) => {
@@ -63,10 +70,10 @@ class Trello extends React.Component {
         }
       ]
     }
-    let numLane = [0,0,0];
+    let numLane = [0, 0, 0];
     dataSource.forEach(item=> {
       numLane[item.status] = numLane[item.status] + 1;
-      boardData.lanes[item.status].label = `(${numLane[item.status].toString()})`;
+      boardData.lanes[item.status].label = (`${numLane[item.status].toString()}`);
       boardData.lanes[item.status].cards.push({
         id: item.key,
         title: item.title,
@@ -75,16 +82,15 @@ class Trello extends React.Component {
         description: <p style={{direction: "rtl"}}>{this.handleTime('dueTime', item)}</p>
       })
     });
-    return boardData;
+    this.setState({boardData: boardData})
   }
 
   render() {
-    const boardData = this.settingData(this.props.dataSource);
     return(
       <Board
         style={{backgroundColor: "#fff", color: "rgba(0, 0, 0, 0.65)"}}
         draggable
-        data={boardData}
+        data={this.state.boardData}
         onDataChange={this.shouldReceiveNewData}
         handleDragStart={this.handleDragStart}
         handleDragEnd={this.handleDragEnd}
