@@ -15,21 +15,21 @@ class Trello extends React.Component {
   };
 
   shouldReceiveNewData = nextData => {
-    console.log('New card has been added')
+    console.log('New card has been added');
     console.log(nextData)
-  }
+  };
 
   handleDragStart = (cardId, laneId) => {
-    console.log('drag started')
-    console.log(`cardId: ${cardId}`)
+    console.log('drag started');
+    console.log(`cardId: ${cardId}`);
     console.log(`laneId: ${laneId}`)
-  }
+  };
 
   handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    console.log('drag ended')
-    console.log(`cardId: ${cardId}`)
-    console.log(`sourceLaneId: ${sourceLaneId}`)
-    console.log(`targetLaneId: ${targetLaneId}`)
+    console.log('drag ended');
+    console.log(`cardId: ${cardId}`);
+    console.log(`sourceLaneId: ${sourceLaneId}`);
+    console.log(`targetLaneId: ${targetLaneId}`);
     if (sourceLaneId !== targetLaneId) {
       this.props.changeStatus(cardId, sourceLaneId, targetLaneId)
     }
