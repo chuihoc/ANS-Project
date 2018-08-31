@@ -1,167 +1,28 @@
 const data = [
-  {
-    key: '1',
-    title: 'Assemble Product Launch Strategy',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-  {
-    key: '2',
-    title: 'Build Creative Assets Test',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '3',
-    title: 'Build Message',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '2'
-  },
-  {
-    key: '4',
-    title: 'Identify Buyer Persona',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '2'
-  },
-  {
-    key: '5',
-    title: 'Identify Launch Goals',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-  {
-    key: '6',
-    title: 'Plan Launch Event',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '7',
-    title: 'Prepare Press Release',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '8',
-    title: 'Research Product Space',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-
-  {
-    key: '9',
-    title: 'Share Nessaging Internally',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '10',
-    title: 'Assemble Product Launch Strategy',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-  {
-    key: '11',
-    title: 'Build Creative Assets',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '12',
-    title: 'Build Message',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '2'
-  },
-  {
-    key: '13',
-    title: 'Identify Buyer Persona',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '2'
-  },
-  {
-    key: '14',
-    title: 'Identify Launch Goals',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-  {
-    key: '15',
-    title: 'Plan Launch Event',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '16',
-    title: 'Prepare Press Release',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '17',
-    title: 'Research Product Space',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-
-  {
-    key: '18',
-    title: 'Share Nessaging Internally',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '2'
-  },
-  {
-    key: '19',
-    title: 'Assemble Product Launch Strategy',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  },
-  {
-    key: '20',
-    title: 'Build Creative Assets',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '0'
-  },
-  {
-    key: '21',
-    title: 'Build Message',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '2'
-  },
-  {
-    key: '22',
-    title: 'Identify Buyer Persona',
-    startTime: 1535097536,
-    dueTime: 1535615936,
-    status: '2'
-  },
-  {
-    key: '23',
-    title: 'Identify Launch Goals',
-    startTime: 1535097536,
-    dueTime: 1535183936,
-    status: '1'
-  }
+  { cardId: 0, id: 1, text: 'Project #1', start_date: '01-04-2018', due_time: 1, duration: 18, order: 10, progress: 0, open: true, parent: 1 },
+  { cardId: 1, id: 2, text: 'Task #1', start_date: '02-04-2018', due_time: 10, duration: 8, order: 10, progress: 0.9, open: true, parent: 1 },
+  { cardId: 1, id: 3, text: 'Task #2', start_date: '11-04-2018', due_time: 8, duration: 8, order: 20, progress: 0.6, open: true, parent: 1 },
+  { cardId: 0, id: 4, text: 'Project #2', start_date: '25-04-2018', due_time: 6, duration: 10, order: 20, progress: 0, open: true, parent: 1 },
+  { cardId: 0, id: 5, text: 'Project #3', start_date: '01-04-2018', due_time: 1, duration: 18, order: 10, progress: 0, open: true, parent: 1 },
+  { cardId: 1, id: 6, text: 'Task #3', start_date: '02-05-2018', due_time: 2, duration: 8, order: 10, progress: 0.5, open: true, parent: 1 },
+  { cardId: 1, id: 7, text: 'Task #4', start_date: '11-06-2018', due_time: 5, duration: 8, order: 20, progress: 0.6, open: true, parent: 1 },
+  { cardId: 0, id: 8, text: 'Project #4', start_date: '25-08-2018', due_time: 1, duration: 10, order: 20, progress: 0, open: true, parent: 1 },
+  { cardId: 1, id: 10, text: 'Task #5', start_date: '02-06-2018', due_time: 4, duration: 8, order: 10, progress: 0.2, open: true, parent: 1 },
+  { cardId: 1, id: 11, text: 'Task #6', start_date: '13-07-2018', due_time: 9, duration: 8, order: 20, progress: 0.2, open: true, parent: 1 },
+  { cardId: 0, id: 12, text: 'Project #5', start_date: '25-05-2018', due_time: 1, duration: 10, order: 20, progress: 0, open: true, parent: 1 },
+  { cardId: 0, id: 13, text: 'Project #6', start_date: '01-04-2018', due_time: 10, duration: 18, order: 10, progress: 0, open: true, parent: 1 },
+  { cardId: 1, id: 14, text: 'Task #7', start_date: '02-07-2018', due_time: 1, duration: 8, order: 10, progress: 0.6, open: true, parent: 1 },
+  { cardId: 1, id: 15, text: 'Task #8', start_date: '16-06-2018', due_time: 15, duration: 8, order: 20, progress: 0.5, open: true, parent: 1 },
+  { cardId: 0, id: 16, text: 'Project #7', start_date: '25-04-2018', due_time: 19, duration: 10, order: 20, progress: 0, open: true, parent: 1 },
+  { cardId: 0, id: 17, text: 'Project #8', start_date: '01-04-2018', due_time: 20, duration: 18, order: 10, progress: 0, open: true, parent: 1 },
+  { cardId: 2, id: 18, text: 'End #1', start_date: '02-04-2018', due_time: 6, duration: 8, order: 10, progress: 1, open: true, parent: 1 },
+  { cardId: 2, id: 19, text: 'End #2', start_date: '11-04-2018', due_time: 2, duration: 8, order: 20, progress: 1, open: true, parent: 1 },
+  { cardId: 0, id: 20, text: 'Project #9', start_date: '25-04-2018', due_time: 7, duration: 10, order: 20, progress: 0, open: true, parent: 1 },
+  { cardId: 0, id: 21, text: 'Project #10', start_date: '09-08-2018', due_time: 1, duration: 18, order: 10, progress: 0, open: true, parent: 1 },
+  { cardId: 2, id: 22, text: 'End #3', start_date: '05-05-2018', due_time: 12, duration: 8, order: 10, progress: 1, open: true, parent: 1 },
+  { cardId: 2, id: 23, text: 'End #4', start_date: '12-06-2018', due_time: 13, duration: 8, order: 20, progress: 1, open: true, parent: 1 },
+  { cardId: 0, id: 24, text: 'Project #11', start_date: '20-04-2018', due_time: 11, duration: 10, order: 20, progress: 0, open: true, parent: 1 },
+  { cardId: 0, id: 9, text: 'Project #12', start_date: '01-04-2018', due_time: 3, duration: 18, order: 10, progress: 0, open: true, parent: 1 },
 ];
 
 export default data;

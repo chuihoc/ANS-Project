@@ -1,0 +1,12 @@
+.dragdrop-container {
+  display: flex;
+  margin-left: 20px;
+}
+.title-drop {
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  color: black;
+  margin-bottom: 10px;
+  border-bottom: solid 2px #00B0FF;
+}

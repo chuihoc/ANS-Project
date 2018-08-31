@@ -10,38 +10,22 @@ class TablePage extends React.Component {
     };
   }
 
-  getStatus = status => {
-    if (status === '0') return <span style={{ color: '#00B0FF' }}>New</span>;
-    if (status === '1') return <span style={{ color: '#00E5FF' }}>In Progress</span>;
-    if (status === '2') return <span style={{ color: '#9CCC65' }}>Complete</span>;
-  };
-  handleTime = (value, item) => {
-    const date = new Date(item[value] * 1000);
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const time = months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
-    if (value === 'startTime') return <span>{time}</span>
-    return <span style={{ color: item.status === '1' && 'red' }}>{time}</span>
-  };
-  handleDuration = item => {
-    const timeStamp = item.dueTime - item.startTime;
-    const duration =
-      timeStamp < 60 ? `${timeStamp} s` :
-        timeStamp < 3600 ? `${(timeStamp/60).toFixed(0)} min` :
-        timeStamp < 86400 ? `${(timeStamp/3600).toFixed(0)} h` : `${(timeStamp/86400).toFixed(0)} d`;
-    return <span>{duration}</span>
+  getStatus = cardId => {
+    if (cardId === 0) return <span style={{ color: '#00B0FF' }}>New</span>;
+    if (cardId === 1) return <span style={{ color: '#00E5FF' }}>In Progress</span>;
+    if (cardId === 2) return <span style={{ color: '#9CCC65' }}>Complete</span>;
   };
 
   handleChange = (pagination, filters, sorter) => {
     // console.log(pagination, filters, sorter);
-    if (filters.status) {
-      if(filters.status.length > 0) {
+    if (filters.cardId) {
+      if(filters.cardId.length > 0) {
         const dataTable = [...this.props.dataSource];
-        const result = dataTable.filter(item => (filters.status.includes(item.status)));
+        const result = dataTable.filter(item => (filters.cardId.includes(item.cardId.toString())));
         this.setState({ dataSource: result });
       } else {
         this.setState({ dataSource: this.props.dataSource });
       }
-
     }
   };
 
@@ -51,34 +35,35 @@ class TablePage extends React.Component {
       {
         title: '',
         width: 54,
-        render: (text, record, index) => index + 1,
+        render: (text, item, index) => index + 1,
         key: 'key'
       },
       {
         title: 'Title',
-        dataIndex: 'title',
-        key: 'title'
+        dataIndex: 'text',
+        key: 'text'
       },
       {
         title: 'Start',
-        render: item => <span>{this.handleTime('startTime', item)}</span>,
-        key: 'startTime'
+        dataIndex: 'start_date',
+        key: 'start_date'
       },
       {
         title: 'Due',
-        render: item => <span>{this.handleTime('dueTime', item)}</span>,
-        key: 'dueTime'
+        dataIndex: 'due_time',
+        render: (text, item) => <span style={{ color: item.cardId === 1 && 'red' }}>{text}</span>,
+        key: 'due_time'
       },
       {
         title: 'Duration',
-        render: item => <span>{this.handleDuration(item)}</span>,
+        dataIndex: 'duration',
         key: 'duration'
       },
       {
         title: 'Status',
-        dataIndex: 'status',
-        render: status => <span>{this.getStatus(status)}</span>,
-        key: 'status',
+        dataIndex: 'cardId',
+        render: cardId => <span>{this.getStatus(cardId)}</span>,
+        key: 'cardId',
         filters: [
           { text: 'New', value: 0 },
           { text: 'In Progress', value: 1 },
