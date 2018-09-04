@@ -72,10 +72,9 @@ class ViewPage extends React.Component {
   render() {
     const TabPane = Tabs.TabPane;
     const { handleAddTag, visibleModal, titleModal, dataModal, typeModal } = this.state;
-    console.log("aaaa", this.props.data)
     return(
       <div style={{ padding: 20 }}>
-        <Tabs defaultActiveKey="1">
+        <Tabs defaultActiveKey="2">
           <TabPane tab="Tab 1" key="1">
             <DragDrop 
               dataSource={this.props.data} 

@@ -91,8 +91,9 @@ class TablePage extends React.Component {
       },
       {
         title: 'Assigned to',
+        dataIndex: 'assigned',
         width: 250,
-        render: () => <DropDown isMultiSelect dataSelect={dataAssigned} />,
+        render: (text, item) => <DropDown isMultiSelect dataSelect={dataAssigned} defaultValue={item.assigned}  />,
         key: 'assign'
       },
     ];

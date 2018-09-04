@@ -9,18 +9,18 @@ class DropDown extends React.Component {
     console.log('test', value);
   }
   render() {
-    const { dataSelect, isMultiSelect, isModal } = this.props;
+    const { dataSelect, defaultValue, isMultiSelect, isModal } = this.props;
     if(isMultiSelect) {
       return(
         <Select
           mode="multiple"
-          labelInValue
           style={{ width: '100%', maxWidth: !isModal && 250 }}
           onChange={this.handleChange}
+          defaultValue={defaultValue}
         >
           {(dataSelect.length && dataSelect.length > 0) &&
-            dataSelect.map(item => (
-              <Select.Option value={item.value}>{item.label}</Select.Option>
+            dataSelect.map((item, index) => (
+              <Select.Option key={index} value={item.value}>{item.label}</Select.Option>
             ))
           }
         </Select>
