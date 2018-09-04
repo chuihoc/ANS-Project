@@ -28,12 +28,8 @@ class ModalContainer extends React.Component {
         cardId: 0,
         text: '',
         start_date: moment(new Date),
-        due_time: '',
         duration: 0,
-        order: 0,
-        progress: 0,
-        open: true,
-        parent: 1
+        assigned: []
       }
     }
   }
@@ -54,6 +50,18 @@ class ModalContainer extends React.Component {
     dataTemp.start_date = moment(date).format('DD-MM-YYYY');
     this.setState({ data: dataTemp })
   }
+
+  handleSelectAssigned = (assigneds) => {
+    const dataTemp = {...this.state.data};
+    dataTemp.assigned = [...assigneds];
+    this.setState({ data: dataTemp })
+  };
+
+  handleSelectDuration = (duration) => {
+    const dataTemp = {...this.state.data};
+    dataTemp.duration = duration;
+    this.setState({ data: dataTemp })
+  };
 
   render() {
     const { dataModal, titleModal, visible, handleOkTag, handleCloseTag, typeModal } = this.props;
@@ -87,11 +95,21 @@ class ModalContainer extends React.Component {
         </div>
         <div className="item-content-modal">
           <div className="title-text select-option">Duration</div>
-          <DropDown dataSelect={duration} style={{ width: '100%' }}/>
+          <DropDown
+            dataSelect={duration}
+            defaultValue={data.duration}
+            style={{ width: '100%' }}
+            handleSelect={value => this.handleSelectDuration(value)}
+          />
         </div>
         <div className="item-content-modal">
           <div className="title-text">Assigned to</div>
-          <DropDown isMultiSelect dataSelect={assignedTo} isModal/>
+          <DropDown
+            isMultiSelect
+            defaultValue={data.assigned}
+            dataSelect={assignedTo} isModal
+            handleSelect={assigneds => this.handleSelectAssigned(assigneds)}
+          />
         </div>
       </Modal>
     )

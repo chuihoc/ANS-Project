@@ -6,7 +6,7 @@ class DropDown extends React.Component {
 
   handleChange = value => {
     this.props.handleSelect(value);
-  }
+  };
   render() {
     const { dataSelect, defaultValue, isMultiSelect, isModal } = this.props;
     if(isMultiSelect) {
@@ -18,9 +18,9 @@ class DropDown extends React.Component {
           defaultValue={defaultValue}
         >
           {(dataSelect.length && dataSelect.length > 0) &&
-            dataSelect.map((item, index) => (
-              <Select.Option key={index} value={item.value}>{item.label}</Select.Option>
-            ))
+          dataSelect.map((item, index) => (
+            <Select.Option key={index} value={item.value}>{item.label}</Select.Option>
+          ))
           }
         </Select>
       )
@@ -28,14 +28,15 @@ class DropDown extends React.Component {
     return(
       <div style={{ position: 'relative', width: '100%' }} id="area">
         <Select
-          defaultValue={dataSelect[0].label}
+          defaultValue={defaultValue}
           getPopupContainer={() => document.getElementById('area')}
           style={{ width: '100%' }}
+          onChange={this.handleChange}
         >
           {(dataSelect.length && dataSelect.length > 0) &&
-            dataSelect.map(item => (
-              <Select.Option value={item.value}>{item.label}</Select.Option>
-            ))
+          dataSelect.map(item => (
+            <Select.Option value={item.value}>{item.label}</Select.Option>
+          ))
           }
         </Select>
       </div>
