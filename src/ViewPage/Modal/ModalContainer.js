@@ -5,11 +5,10 @@ import DropDown from '../DropDown/DropDown';
 import './ModalContainer.css';
 
 const duration = [
-  { value: 1, label: 'hung.cv1' },
-  { value: 2, label: 'hung.cv2' },
-  { value: 3, label: 'hung.cv3' },
-  { value: 4, label: 'hung.cv4' },
-  { value: 5, label: 'hung.cv5' }
+  { value: 1, label: '1' },
+  { value: 5, label: '5' },
+  { value: 10, label: '10' },
+  { value: 15, label: '15' }
 ];
 const assignedTo = [
   { value: 1, label: 'hung.cv1' },
@@ -48,13 +47,13 @@ class ModalContainer extends React.Component {
     const dataTemp = { ...this.state.data };
     dataTemp.text = e.target.value;
     this.setState({ data: dataTemp })
-  }
+  };
 
   handleChangeStartDate = (date) => {
     const dataTemp = { ...this.state.data };
     dataTemp.start_date = moment(date).format('DD-MM-YYYY');
     this.setState({ data: dataTemp })
-  }
+  };
 
   handleSelectAssigned = (assigneds) => {
     const dataTemp = {...this.state.data};
