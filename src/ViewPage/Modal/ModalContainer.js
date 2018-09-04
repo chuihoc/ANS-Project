@@ -27,12 +27,12 @@ class ModalContainer extends React.Component {
       data: props.typeModal === 'Edit' ? props.dataModal : {
         cardId: 0,
         text: '',
-        start_date: '', 
-        due_time: '', 
-        duration: 0, 
-        order: 0, 
-        progress: 0, 
-        open: true, 
+        start_date: moment(new Date),
+        due_time: '',
+        duration: 0,
+        order: 0,
+        progress: 0,
+        open: true,
         parent: 1
       }
     }
@@ -42,10 +42,24 @@ class ModalContainer extends React.Component {
     if (nextProps.dataModal !== this.props.dataModal)
       this.setState({ data: nextProps.dataModal })
   }
+
+  handleChangeTitleTag = (e) => {
+    const dataTemp = { ...this.state.data };
+    dataTemp.text = e.target.value;
+    this.setState({ data: dataTemp })
+  }
+
+  handleChangeStartDate = (date) => {
+    const dataTemp = { ...this.state.data };
+    dataTemp.start_date = moment(date).format('DD-MM-YYYY');
+    this.setState({ data: dataTemp })
+  }
+
   render() {
     const { dataModal, titleModal, visible, handleOkTag, handleCloseTag, typeModal } = this.props;
     const { data } = this.state;
-    return(
+    console.log(data)
+    return (
       <Modal
         title={titleModal}
         centered
@@ -54,19 +68,30 @@ class ModalContainer extends React.Component {
         onCancel={handleCloseTag}>
         <div className="item-content-modal">
           <div className="title-text">Title</div>
-          <Input.TextArea placeholder="Enter title project" autosize value={data.text} style={{width: '100%'}} />
+          <Input.TextArea
+            placeholder="Enter title project"
+            autosize
+            value={data.text}
+            style={{ width: '100%' }}
+            onChange={this.handleChangeTitleTag}
+          />
         </div>
         <div className="item-content-modal">
           <div className="title-text">Start date</div>
-          <DatePicker defaultValue={moment(data.start_date, 'DD-MM-YYYY')} style={{width: '100%'}} />
+          <DatePicker
+            defaultValue={moment(data.start_date, 'DD-MM-YYYY')}
+            format="DD-MM-YYYY"
+            style={{ width: '100%' }}
+            onChange={this.handleChangeStartDate}
+          />
         </div>
         <div className="item-content-modal">
           <div className="title-text select-option">Duration</div>
-          <DropDown dataSelect={duration} style={{width: '100%'}} />
+          <DropDown dataSelect={duration} style={{ width: '100%' }}/>
         </div>
         <div className="item-content-modal">
           <div className="title-text">Assigned to</div>
-          <DropDown isMultiSelect dataSelect={assignedTo} isModal />
+          <DropDown isMultiSelect dataSelect={assignedTo} isModal/>
         </div>
       </Modal>
     )
