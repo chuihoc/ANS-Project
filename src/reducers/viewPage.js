@@ -1,4 +1,4 @@
-import { UPDATE_DATA, DELETE_ITEM } from '../constants/actionTypes';
+import { UPDATE_DATA, DELETE_ITEM, ADD_ITEM, EDIT_ITEM } from '../constants/actionTypes';
 import dataTemp from '../ViewPage/Data';
 
 let initialState = {
@@ -15,6 +15,16 @@ const viewPage = (state = initialState, action) => {
         isFetching: !state.isFetching
       };
     case DELETE_ITEM:
+      return {
+        ...state,
+        data: action.payload
+      };
+    case ADD_ITEM:
+      return {
+        ...state,
+        data: action.payload
+      };
+    case EDIT_ITEM:
       return {
         ...state,
         data: action.payload

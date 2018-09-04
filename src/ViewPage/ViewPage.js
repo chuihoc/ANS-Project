@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { connect } from "react-redux";
 
-import { updateData, deleteItem } from '../action/viewPage';
+import { updateData, deleteItem, addItem, editItem } from '../action/viewPage';
 
 import 'antd/dist/antd.css';
 import TablePage from './TablePage';
@@ -23,10 +23,10 @@ class ViewPage extends React.Component {
   updateData = (itemId, droppableId) => {
     const dataTemp = this.props.data;
     dataTemp.forEach(item => {
-      if(item.id === itemId) {
+      if (item.id === itemId) {
         if (droppableId === "droppableId1") {
           item.cardId = 0;
-        } else if(droppableId === "droppableId2")
+        } else if (droppableId === "droppableId2")
           item.cardId = 1;
         else
           item.cardId = 2;
@@ -34,66 +34,78 @@ class ViewPage extends React.Component {
     });
     this.props.updateData(dataTemp)
 
-  }
+  };
 
   handleAddTag = droppableId => {
-    this.setState({ 
+    this.setState({
       visibleModal: true,
       titleModal: droppableId === "droppableId1" ? "New" : (droppableId === "droppableId2" ? "In Progress" : "Completed"),
       typeModal: "Add"
     })
-  }
+  };
 
   handleEditTag = item => {
-    this.setState({ 
+    this.setState({
       visibleModal: true,
       titleModal: item.cardId === 0 ? "New" : (item.cardId === 1 ? "In Progress" : "Completed"),
       dataModal: item,
       typeModal: "Edit"
     })
-  }
+  };
 
   handleDeleteTag = item => {
     this.props.deleteItem(item);
-  }
+  };
 
   handleCloseTag = () => {
     this.setState({
       visibleModal: false,
       titleModal: ""
     })
-  }
+  };
 
-  handleOkTag = () => {
+  handleOkTag = (item) => {
     // action
+    console.log(item)
+    if (this.state.typeModal === "Add") {
+      this.props.addItem(item)
+    } else if (this.state.typeModal === "Edit") {
+      const dataTemp = [...this.props.data];
+      dataTemp.forEach((itemData, index) => {
+        if (itemData.id === item.id) {
+          dataTemp[index] = item;
+        }
+      });
+      this.props.editItem(dataTemp)
+    }
     this.handleCloseTag();
   }
 
   render() {
     const TabPane = Tabs.TabPane;
     const { handleAddTag, visibleModal, titleModal, dataModal, typeModal } = this.state;
-    return(
+    return (
       <div style={{ padding: 20 }}>
         <Tabs defaultActiveKey="2">
           <TabPane tab="Tab 1" key="1">
-            <DragDrop 
-              dataSource={this.props.data} 
-              updateData={this.updateData} 
-              handleAddTag={this.handleAddTag} 
-              handleEditTag={this.handleEditTag} 
-              handleDeleteTag={this.handleDeleteTag} />
-            </TabPane>
+            <DragDrop
+              dataSource={this.props.data}
+              updateData={this.updateData}
+              handleAddTag={this.handleAddTag}
+              handleEditTag={this.handleEditTag}
+              handleDeleteTag={this.handleDeleteTag}/>
+          </TabPane>
           <TabPane tab="Tab 2" key="2"><TablePage dataSource={this.props.data}/></TabPane>
         </Tabs>
-        {visibleModal && 
-          <ModalContainer
-            titleModal={titleModal}
-            visible={visibleModal} 
-            handleCloseTag={this.handleCloseTag}
-            handleOkTag={this.handleOkTag}
-            dataModal={dataModal} 
-            typeModal={typeModal}
-          />
+        {visibleModal &&
+        <ModalContainer
+          titleModal={titleModal}
+          visible={visibleModal}
+          handleCloseTag={this.handleCloseTag}
+          handleOkTag={this.handleOkTag}
+          dataModal={dataModal}
+          typeModal={typeModal}
+        />
         }
       </div>
     )
@@ -111,6 +123,12 @@ const mapDispatchToProps = dispatch => ({
   },
   deleteItem: item => {
     dispatch(deleteItem(item));
+  },
+  addItem: item => {
+    dispatch(addItem(item));
+  },
+  editItem: item => {
+    dispatch(editItem(item));
   }
-})
+});
 export default connect(mapStateToProps, mapDispatchToProps)(ViewPage);

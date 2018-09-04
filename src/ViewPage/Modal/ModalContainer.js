@@ -25,11 +25,16 @@ class ModalContainer extends React.Component {
     super(props);
     this.state = {
       data: props.typeModal === 'Edit' ? props.dataModal : {
-        cardId: 0,
+        cardId: props.titleModal === "New" ? 0 : (props.titleModal === "In Progress" ? 1 : 2),
         text: '',
-        start_date: moment(new Date),
+        start_date: moment(new Date).format('DD-MM-YYYY'),
         duration: 0,
-        assigned: []
+        assigned: [],
+        id: 999,
+        due_time: '02-09-2018',
+        progress: props.titleModal === "New" ? 0 : (props.titleModal === "In Progress" ? 0.1 : 1),
+        open: true,
+        parent: 1,
       }
     }
   }
@@ -63,16 +68,18 @@ class ModalContainer extends React.Component {
     this.setState({ data: dataTemp })
   };
 
+  handleSaveChangeTag = () => {
+    this.props.handleOkTag(this.state.data)
+  }
   render() {
-    const { dataModal, titleModal, visible, handleOkTag, handleCloseTag, typeModal } = this.props;
+    const { titleModal, visible, handleOkTag, handleCloseTag } = this.props;
     const { data } = this.state;
-    console.log(data)
     return (
       <Modal
         title={titleModal}
         centered
         visible={visible}
-        onOk={handleOkTag}
+        onOk={this.handleSaveChangeTag}
         onCancel={handleCloseTag}>
         <div className="item-content-modal">
           <div className="title-text">Title</div>
