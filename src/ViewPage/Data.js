@@ -8,7 +8,7 @@ const data = [
     duration: 18, order: 10,
     progress: 0, open: true,
     parent: 1,
-    assigned: ['hung.cv1', 'hung.cv2']
+    assigned: [1, 2, 3]
   },
   {
     cardId: 1,
@@ -34,7 +34,7 @@ const data = [
     progress: 0.6,
     open: true,
     parent: 1,
-    assigned: ['hung.cv5', 'hung.cv2']
+    assigned: [5, 2]
   },
   {
     cardId: 0,
@@ -47,7 +47,7 @@ const data = [
     progress: 0,
     open: true,
     parent: 1,
-    assigned: ['hung.cv1', 'hung.cv3']
+    assigned: [1, 3]
   },
   {
     cardId: 0,
