@@ -1,7 +1,16 @@
 import React from 'react';
 import { Table } from 'antd';
 import 'antd/dist/antd.css';
+import DropDown from './DropDown/DropDown';
 
+
+const dataAssigned = [
+  { value: 1, label: 'hung.cv1' },
+  { value: 2, label: 'hung.cv2' },
+  { value: 3, label: 'hung.cv3' },
+  { value: 4, label: 'hung.cv4' },
+  { value: 5, label: 'hung.cv5' }
+];
 class TablePage extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +19,10 @@ class TablePage extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.dataSource !== this.props.dataSource)
+      this.setState({ dataSource: nextProps.dataSource })
+  }
   getStatus = cardId => {
     if (cardId === 0) return <span style={{ color: '#00B0FF' }}>New</span>;
     if (cardId === 1) return <span style={{ color: '#00E5FF' }}>In Progress</span>;
@@ -60,6 +73,12 @@ class TablePage extends React.Component {
         key: 'duration'
       },
       {
+        title: 'Progress',
+        dataIndex: 'progress',
+        render: (text, item) => <span>{item.progress*100}%</span>,
+        key: 'progress'
+      },
+      {
         title: 'Status',
         dataIndex: 'cardId',
         render: cardId => <span>{this.getStatus(cardId)}</span>,
@@ -72,7 +91,8 @@ class TablePage extends React.Component {
       },
       {
         title: 'Assigned to',
-        render: () => '',
+        width: 250,
+        render: () => <DropDown isMultiSelect dataSelect={dataAssigned} />,
         key: 'assign'
       },
     ];

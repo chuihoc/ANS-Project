@@ -13,20 +13,27 @@ const getListStyle = isDraggingOver => ({
 
 class Drop extends React.Component {
 
+  handleAddTag = () => {
+    this.props.handleAddTag(this.props.droppableId)
+  }
   render() {
-    const { data, droppableId, title } = this.props;
+    const { data, droppableId, title, handleEditTag, handleDeleteTag } = this.props;
     return(
       <Droppable droppableId={droppableId}>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
+            type="BOARD"
             style={getListStyle(snapshot.isDraggingOver)}>
             <div className="title-drop">
               <span>{title}</span>&nbsp;
               <span>{`(${this.props.data.length})`}</span>
             </div>
+            <div className="add-tag" onClick={this.handleAddTag}>
+              <span>Add Tag</span>
+            </div>
             {data.map((item, index) => (
-              <Drag item={item} index={index}/>
+              <Drag key={item.id} item={item} index={index} handleEditTag={handleEditTag} handleDeleteTag={handleDeleteTag} />
             ))}
             {provided.placeholder}
           </div>

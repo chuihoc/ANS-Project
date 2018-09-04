@@ -58,6 +58,14 @@ class DragDrop extends React.Component {
     droppableId3: 'dataCompleted'
   };
   
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.dataSource !== this.props.dataSource)
+      this.state = {
+      dataNew: getItem('new', nextProps.dataSource),
+      dataInProgress: getItem('inProgress', nextProps.dataSource),
+      dataCompleted: getItem('completed', nextProps.dataSource)
+    }
+  }
   getList = id => this.state[this.listDroppableId[id]];
 
   onDragEnd = result => {
@@ -122,12 +130,34 @@ class DragDrop extends React.Component {
   }
   render() {
     const { dataNew, dataInProgress, dataCompleted } = this.state;
+    const { handleAddTag, handleEditTag, handleDeleteTag } = this.props;
     return(
       <div className="dragdrop-container">
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <Drop droppableId="droppableId1" data={dataNew} title="New"/>
-          <Drop droppableId="droppableId2" data={dataInProgress} title="In Progress"/>
-          <Drop droppableId="droppableId3" data={dataCompleted} title="Completed"/>
+          <Drop
+            droppableId="droppableId1"
+            data={dataNew}
+            title="New"
+            handleAddTag={handleAddTag}
+            handleEditTag={handleEditTag}
+            handleDeleteTag={handleDeleteTag}
+          />
+          <Drop
+            droppableId="droppableId2"
+            data={dataInProgress}
+            title="In Progress"
+            handleAddTag={handleAddTag}
+            handleEditTag={handleEditTag}
+            handleDeleteTag={handleDeleteTag}
+          />
+          <Drop
+            droppableId="droppableId3"
+            data={dataCompleted}
+            title="Completed"
+            handleAddTag={handleAddTag}
+            handleEditTag={handleEditTag}
+            handleDeleteTag={handleDeleteTag}
+          />
       </DragDropContext>
       </div>
     )

@@ -10,3 +10,22 @@
   margin-bottom: 10px;
   border-bottom: solid 2px #00B0FF;
 }
+.add-tag {
+  user-select: none;
+  padding: 16px 30px 16px;
+  margin: 0px 0px 8px;
+  background: white;
+  box-shadow: rgb(224, 224, 224) 1px 2px;
+  height: 74px;
+  font-size: 18px;
+  color: #00B0FF;
+  cursor: pointer;
+}
+.action-tag {
+  float: right;
+  color: #00B0FF;
+  padding-right: 10px;
+}
+.func-edit-delete {
+  padding: 0 10px;
+}

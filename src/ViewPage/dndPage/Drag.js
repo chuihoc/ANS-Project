@@ -1,5 +1,6 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { Popconfirm } from 'antd';
 
 const grid = 8;
 
@@ -17,6 +18,13 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
 class Drag extends React.Component {
 
+  handleEditTag = () => {
+    this.props.handleEditTag(this.props.item)
+  }
+
+  handleDeleteTag = () => {
+    this.props.handleDeleteTag(this.props.item)
+  }
   render() {
     const { item, index } = this.props;
     return(
@@ -34,7 +42,19 @@ class Drag extends React.Component {
               provided.draggableProps.style
             )}>
             {item.text}<br />
-            <p style={{ direction: 'rtl', marginBottom: 0, color: item.cardId === 1 && 'red' }}>{item.start_date}</p>
+            <span style={{ marginBottom: 0, color: item.cardId === 1 && 'red' }}>{item.start_date}</span>
+            <span className="action-tag">
+              <span className="func-edit-delete" onClick={this.handleEditTag}>Edit</span>
+              <span>|</span>
+              <Popconfirm
+                title="Are you sure delete this task?"
+                onConfirm={this.handleDeleteTag}
+                okText="Yes"
+                cancelText="No"
+              >
+                <span className="func-edit-delete">Delete</span>
+              </Popconfirm>
+            </span>
           </div>
         )}
       </Draggable>

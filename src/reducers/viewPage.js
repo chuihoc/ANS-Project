@@ -1,13 +1,20 @@
-import { UPDATE_DATA } from '../constants/actionTypes';
+import { UPDATE_DATA, DELETE_ITEM } from '../constants/actionTypes';
 import dataTemp from '../ViewPage/Data';
 
 let initialState = {
-  data: dataTemp
+  data: dataTemp,
+  isFeching: false
 };
 
 const viewPage = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_DATA:
+      return {
+        ...state,
+        data: action.payload,
+        isFeching: !state.isFeching
+      }
+    case DELETE_ITEM:
       return {
         ...state,
         data: action.payload
