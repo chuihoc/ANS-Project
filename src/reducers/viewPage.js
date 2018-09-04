@@ -3,7 +3,7 @@ import dataTemp from '../ViewPage/Data';
 
 let initialState = {
   data: dataTemp,
-  isFeching: false
+  isFetching: false
 };
 
 const viewPage = (state = initialState, action) => {
@@ -12,15 +12,15 @@ const viewPage = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
-        isFeching: !state.isFeching
-      }
+        isFetching: !state.isFetching
+      };
     case DELETE_ITEM:
       return {
         ...state,
         data: action.payload
-      }
+      };
     default:
       return state;
   }
-}
+};
 export default viewPage;

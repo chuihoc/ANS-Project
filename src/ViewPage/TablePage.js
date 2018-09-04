@@ -41,6 +41,12 @@ class TablePage extends React.Component {
       }
     }
   };
+  handleSelect = (item, data, index) => {
+    // console.log('data', item, data, index);
+    const tempData = [...this.state.dataSource];
+    tempData[index].assigned = [...data];
+    this.setState({ dataSource: tempData })
+  };
 
   render() {
     const { dataSource } = this.state;
@@ -93,7 +99,13 @@ class TablePage extends React.Component {
         title: 'Assigned to',
         dataIndex: 'assigned',
         width: 250,
-        render: (text, item) => <DropDown isMultiSelect dataSelect={dataAssigned} defaultValue={item.assigned}  />,
+        render: (text, item, index) =>
+          <DropDown
+            isMultiSelect
+            dataSelect={dataAssigned}
+            defaultValue={item.assigned}
+            handleSelect={data => this.handleSelect(item, data, index)}
+          />,
         key: 'assign'
       },
     ];

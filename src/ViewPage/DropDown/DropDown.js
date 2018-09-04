@@ -5,8 +5,7 @@ import 'antd/dist/antd.css';
 class DropDown extends React.Component {
 
   handleChange = value => {
-    // implement assigned function
-    console.log('test', value);
+    this.props.handleSelect(value);
   }
   render() {
     const { dataSelect, defaultValue, isMultiSelect, isModal } = this.props;
