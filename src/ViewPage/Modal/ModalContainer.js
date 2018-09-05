@@ -71,7 +71,7 @@ class ModalContainer extends React.Component {
     this.props.handleOkTag(this.state.data)
   }
   render() {
-    const { titleModal, visible, handleCloseTag, typeModal } = this.props;
+    const { titleModal, visible, handleCloseTag } = this.props;
     const { data } = this.state;
     return (
       <Modal
@@ -80,7 +80,7 @@ class ModalContainer extends React.Component {
         visible={visible}
         onOk={this.handleSaveChangeTag}
         onCancel={handleCloseTag}
-        okButtonProps={{ disabled: typeModal === 'Add' && data.text.length === 0 }}
+        okButtonProps={{ disabled: data.text.length === 0 }}
       >
         <div className="item-content-modal">
           <div className="title-text">
