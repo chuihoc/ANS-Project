@@ -60,17 +60,16 @@ class DragDrop extends React.Component {
   
   componentWillReceiveProps(nextProps) {
     if(nextProps.dataSource !== this.props.dataSource)
-      this.state = {
+      this.setState({
       dataNew: getItem('new', nextProps.dataSource),
       dataInProgress: getItem('inProgress', nextProps.dataSource),
       dataCompleted: getItem('completed', nextProps.dataSource)
-    }
+    })
   }
   getList = id => this.state[this.listDroppableId[id]];
 
   onDragEnd = result => {
     const { source, destination, draggableId } = result;
-    console.log(result)
     if (!destination) {
       return;
     }
@@ -124,7 +123,6 @@ class DragDrop extends React.Component {
               dataInProgress: result.droppableId2
             });
         }
-        console.log(result)
         this.props.updateData(draggableId, destination.droppableId);
       }
   }

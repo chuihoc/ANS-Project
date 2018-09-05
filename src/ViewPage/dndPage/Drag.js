@@ -41,8 +41,8 @@ class Drag extends React.Component {
               snapshot.isDragging,
               provided.draggableProps.style
             )}>
-            {item.text}<br />
-            <span style={{ marginBottom: 0, color: item.cardId === 1 && 'red' }}>{item.start_date}</span>
+            <span style={{ fontSize: 16 }}> {item.text}</span><br />
+            <span style={{ marginBottom: 0, fontSize: 12, color: item.cardId === 1 && 'red' }}>{item.start_date}</span>
             <span className="action-tag">
               <span className="func-edit-delete" onClick={this.handleEditTag}>Edit</span>
               <span>|</span>

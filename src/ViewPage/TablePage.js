@@ -11,6 +11,8 @@ const dataAssigned = [
   { value: 4, label: 'hung.cv4' },
   { value: 5, label: 'hung.cv5' }
 ];
+let activePage = 0;
+
 class TablePage extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,7 @@ class TablePage extends React.Component {
   };
 
   handleChange = (pagination, filters, sorter) => {
-    // console.log(pagination, filters, sorter);
+    activePage = pagination.current - 1;
     if (filters.cardId) {
       if(filters.cardId.length > 0) {
         const dataTable = [...this.props.dataSource];
@@ -42,10 +44,10 @@ class TablePage extends React.Component {
     }
   };
   handleSelect = (item, data, index) => {
-    // console.log('data', item, data, index);
     const tempData = [...this.state.dataSource];
     tempData[index].assigned = [...data];
-    this.setState({ dataSource: tempData })
+    // this.setState({ dataSource: tempData });
+    this.props.updateData(tempData);
   };
 
   render() {
@@ -54,7 +56,7 @@ class TablePage extends React.Component {
       {
         title: '',
         width: 54,
-        render: (text, item, index) => index + 1,
+        render: (text, item, index) => index + 1 + activePage * 10,
         key: 'key'
       },
       {
@@ -101,10 +103,12 @@ class TablePage extends React.Component {
         width: 250,
         render: (text, item, index) =>
           <DropDown
+            key={item.id}
+            rowKey={item => item.id}
             isMultiSelect
             dataSelect={dataAssigned}
             defaultValue={item.assigned}
-            handleSelect={data => this.handleSelect(item, data, index)}
+            handleSelect={data => this.handleSelect(item, data, index + activePage * 10)}
           />,
         key: 'assign'
       },
@@ -112,6 +116,7 @@ class TablePage extends React.Component {
     return(
       <Table
         bordered
+        rowKey={record => record.id}
         dataSource={dataSource}
         columns={columns}
         onChange={this.handleChange}

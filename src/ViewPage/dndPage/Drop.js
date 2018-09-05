@@ -1,13 +1,12 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
+import { Icon } from 'antd';
 
 import Drag from './Drag';
 
-const grid = 20;
-
 const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? 'lightblue' : '#E0F7FA',
-  padding: grid,
+  padding: 20,
   width: '33%'
 });
 
@@ -30,7 +29,7 @@ class Drop extends React.Component {
               <span>{`(${this.props.data.length})`}</span>
             </div>
             <div className="add-tag" onClick={this.handleAddTag}>
-              <span>Add Tag</span>
+              <span className="text-content"><Icon type="plus" theme="outlined" />&nbsp;&nbsp;New Task</span>
             </div>
             {data.map((item, index) => (
               <Drag key={item.id} item={item} index={index} handleEditTag={handleEditTag} handleDeleteTag={handleDeleteTag} />

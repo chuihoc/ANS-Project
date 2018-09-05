@@ -26,7 +26,7 @@ class ModalContainer extends React.Component {
       data: props.typeModal === 'Edit' ? props.dataModal : {
         cardId: props.titleModal === "New" ? 0 : (props.titleModal === "In Progress" ? 1 : 2),
         text: '',
-        start_date: moment(new Date).format('DD-MM-YYYY'),
+        start_date: moment(new Date()).format('DD-MM-YYYY'),
         duration: 0,
         assigned: [],
         id: 999,
@@ -43,25 +43,25 @@ class ModalContainer extends React.Component {
       this.setState({ data: nextProps.dataModal })
   }
 
-  handleChangeTitleTag = (e) => {
+  handleChangeTitleTag = e => {
     const dataTemp = { ...this.state.data };
     dataTemp.text = e.target.value;
     this.setState({ data: dataTemp })
   };
 
-  handleChangeStartDate = (date) => {
+  handleChangeStartDate = date => {
     const dataTemp = { ...this.state.data };
     dataTemp.start_date = moment(date).format('DD-MM-YYYY');
     this.setState({ data: dataTemp })
   };
 
-  handleSelectAssigned = (assigneds) => {
+  handleSelectAssigned = assigneds => {
     const dataTemp = {...this.state.data};
     dataTemp.assigned = [...assigneds];
     this.setState({ data: dataTemp })
   };
 
-  handleSelectDuration = (duration) => {
+  handleSelectDuration = duration => {
     const dataTemp = {...this.state.data};
     dataTemp.duration = duration;
     this.setState({ data: dataTemp })
@@ -71,7 +71,7 @@ class ModalContainer extends React.Component {
     this.props.handleOkTag(this.state.data)
   }
   render() {
-    const { titleModal, visible, handleOkTag, handleCloseTag } = this.props;
+    const { titleModal, visible, handleCloseTag, typeModal } = this.props;
     const { data } = this.state;
     return (
       <Modal
@@ -79,9 +79,14 @@ class ModalContainer extends React.Component {
         centered
         visible={visible}
         onOk={this.handleSaveChangeTag}
-        onCancel={handleCloseTag}>
+        onCancel={handleCloseTag}
+        okButtonProps={{ disabled: typeModal === 'Add' && data.text.length === 0 }}
+      >
         <div className="item-content-modal">
-          <div className="title-text">Title</div>
+          <div className="title-text">
+            Title
+            <span style={{ color: 'red', fontWeight: 'normal' }}>&nbsp;*</span>
+          </div>
           <Input.TextArea
             placeholder="Enter title project"
             autosize
@@ -112,8 +117,9 @@ class ModalContainer extends React.Component {
           <div className="title-text">Assigned to</div>
           <DropDown
             isMultiSelect
+            isModal
             defaultValue={data.assigned}
-            dataSelect={assignedTo} isModal
+            dataSelect={assignedTo}
             handleSelect={assigneds => this.handleSelectAssigned(assigneds)}
           />
         </div>

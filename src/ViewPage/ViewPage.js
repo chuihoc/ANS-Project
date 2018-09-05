@@ -16,7 +16,8 @@ class ViewPage extends React.Component {
       visibleModal: false,
       titleModal: '',
       dataModal: null,
-      typeModal: ''
+      typeModal: '',
+      currentTab: "1"
     }
   }
 
@@ -33,7 +34,6 @@ class ViewPage extends React.Component {
       }
     });
     this.props.updateData(dataTemp)
-
   };
 
   handleAddTag = droppableId => {
@@ -64,9 +64,7 @@ class ViewPage extends React.Component {
     })
   };
 
-  handleOkTag = (item) => {
-    // action
-    console.log(item)
+  handleOkTag = item => {
     if (this.state.typeModal === "Add") {
       this.props.addItem(item)
     } else if (this.state.typeModal === "Edit") {
@@ -81,21 +79,34 @@ class ViewPage extends React.Component {
     this.handleCloseTag();
   }
 
+  handleChangeTab = key => {
+    this.setState({ currentTab: key })
+  }
   render() {
     const TabPane = Tabs.TabPane;
-    const { handleAddTag, visibleModal, titleModal, dataModal, typeModal } = this.state;
+    const { visibleModal, titleModal, dataModal, typeModal } = this.state;
     return (
       <div style={{ padding: 20 }}>
-        <Tabs defaultActiveKey="2">
+        <Tabs onChange={this.handleChangeTab}>
           <TabPane tab="Tab 1" key="1">
-            <DragDrop
-              dataSource={this.props.data}
-              updateData={this.updateData}
-              handleAddTag={this.handleAddTag}
-              handleEditTag={this.handleEditTag}
-              handleDeleteTag={this.handleDeleteTag}/>
+            {this.state.currentTab === "1" &&
+              <DragDrop
+                dataSource={this.props.data}
+                updateData={this.updateData}
+                handleAddTag={this.handleAddTag}
+                handleEditTag={this.handleEditTag}
+                handleDeleteTag={this.handleDeleteTag}
+              />
+            }
           </TabPane>
-          <TabPane tab="Tab 2" key="2"><TablePage dataSource={this.props.data}/></TabPane>
+          <TabPane tab="Tab 2" key="2" >
+            {this.state.currentTab === "2" &&
+              <TablePage
+                dataSource={this.props.data}
+                updateData={this.props.updateData}
+              />
+            } 
+          </TabPane>
         </Tabs>
         {visibleModal &&
         <ModalContainer
@@ -114,7 +125,7 @@ class ViewPage extends React.Component {
 
 const mapStateToProps = state => ({
   data: state.viewPage.data,
-  isFeching: state.viewPage.isFeching
+  isFetching: state.viewPage.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({

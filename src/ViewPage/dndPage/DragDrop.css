@@ -12,8 +12,8 @@
 }
 .add-tag {
   user-select: none;
-  padding: 16px 30px 16px;
-  margin: 0px 0px 8px;
+  padding: 16px;
+  margin: 0 0 8px;
   background: white;
   box-shadow: rgb(224, 224, 224) 1px 2px;
   height: 74px;
@@ -21,11 +21,13 @@
   color: #00B0FF;
   cursor: pointer;
 }
+.text-content {
+  vertical-align: -webkit-baseline-middle;
+}
 .action-tag {
   float: right;
   color: #00B0FF;
-  padding-right: 10px;
 }
 .func-edit-delete {
-  padding: 0 10px;
+  padding: 0 10px 5px 10px;
 }
