@@ -32,7 +32,7 @@ class Drop extends React.Component {
               <span className="text-content"><Icon type="plus" theme="outlined" />&nbsp;&nbsp;New Task</span>
             </div>
             {data.map((item, index) => (
-              <Drag key={item.id} item={item} index={index} handleEditTag={handleEditTag} handleDeleteTag={handleDeleteTag} />
+              <Drag key={item.id + index} item={item} index={index} handleEditTag={handleEditTag} handleDeleteTag={handleDeleteTag} />
             ))}
             {provided.placeholder}
           </div>
