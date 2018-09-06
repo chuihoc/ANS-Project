@@ -66,6 +66,7 @@ class ViewPage extends React.Component {
 
   handleOkTag = item => {
     if (this.state.typeModal === "Add") {
+      item.id = Math.floor((Math.random() * 100000) + 1000);
       this.props.addItem(item)
     } else if (this.state.typeModal === "Edit") {
       const dataTemp = [...this.props.data];
